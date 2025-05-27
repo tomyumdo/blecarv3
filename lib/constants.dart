@@ -1,0 +1,9 @@
+const DEVICE_MAC_ID = "DC:06:75:68:DA:2E";
+
+const SERVICE_UUID = "8e364c66-68eb-4dd4-ad06-5306e465ec3b";
+const CHARACTERISTIC_UUID_RX = "a44823e4-283c-4392-9c36-1665b378f41f";
+const CHARACTERISTIC_UUID_TX = "e5f2bb3c-4188-4ea3-b6e3-04a78cd5033d";
+
+const CH1 = 0x01;
+const CH2 = 0x02;
+const CH3 = 0x03;
