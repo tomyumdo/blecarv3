@@ -25,6 +25,7 @@ class _ControllerScreenState extends State<ControllerScreen> {
   bool ledstatus = false;
   bool connected = false;
 
+  double _speedValue = 50;
   double _sliderValue1 = 0;
   double _sliderValue2 = 0;
 
@@ -323,6 +324,31 @@ class _ControllerScreenState extends State<ControllerScreen> {
                         ),
                       ),
                     ],
+                  ),
+                  RotatedBox(
+                    quarterTurns: -1,
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          trackHeight: 32,
+                          thumbShape: const RoundSliderThumbShape(
+                              enabledThumbRadius: 32),
+                          activeTrackColor: Colors.white10,
+                          inactiveTrackColor: Colors.white10,
+                          thumbColor: Colors.white60),
+                      child: Slider(
+                        value: _speedValue,
+                        min: 64,
+                        max: 255,
+                        divisions: 20,
+                        label: _speedValue.round().toString(),
+                        onChanged: (double newValue) {
+                          setState(() {
+                            _speedValue = newValue;
+                            writeBLE(CH4, _speedValue.toInt()); // forward
+                          });
+                        },
+                      ),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

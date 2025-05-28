@@ -7,3 +7,4 @@ const CHARACTERISTIC_UUID_TX = "e5f2bb3c-4188-4ea3-b6e3-04a78cd5033d";
 const CH1 = 0x01;
 const CH2 = 0x02;
 const CH3 = 0x03;
+const CH4 = 0x04;

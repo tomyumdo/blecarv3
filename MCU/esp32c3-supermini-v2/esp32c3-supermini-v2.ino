@@ -23,13 +23,14 @@
 #define CH1 1
 #define CH2 2
 #define CH3 3
+#define CH4 4 
 
 #define FORWARD 1
 #define BACKWARD 2
 #define TURNLEFT 3
 #define TURNRIGHT 4
 
-#define SPEED 64
+int speed =  64;
 
 BLEServer* pServer = NULL;
 BLECharacteristic* pCharacteristicTX = NULL;
@@ -67,11 +68,11 @@ class RXCallback : public BLECharacteristicCallbacks {
         if (data[1] == FORWARD) {
           digitalWrite(AIN1, LOW);
           digitalWrite(AIN2, HIGH);
-          analogWrite(PWMA, SPEED);
+          analogWrite(PWMA, speed);
         } else if (data[1] == BACKWARD) {
           digitalWrite(AIN1, HIGH);
           digitalWrite(AIN2, LOW);
-          analogWrite(PWMA, SPEED);
+          analogWrite(PWMA, speed);
         } else {
           digitalWrite(AIN1, LOW);
           digitalWrite(AIN2, LOW);
@@ -103,6 +104,10 @@ class RXCallback : public BLECharacteristicCallbacks {
           digitalWrite(LED, LOW);
         }
         break;
+      case CH4:
+        Serial.printf("Speed: %d\n", data[1]);
+        speed = data[1];
+        break;
       default:
         break;
     }
@@ -121,6 +126,9 @@ static void initial() {
   pinMode(STBY, OUTPUT);
   digitalWrite(STBY, HIGH);
   digitalWrite(LED, LOW);
+
+  analogWriteResolution(PWMA, 8);
+  analogWriteResolution(PWMB, 8);
 
   digitalWrite(AIN1, LOW);
   digitalWrite(AIN2, LOW);
